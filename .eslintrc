@@ -1,0 +1,59 @@
+{
+    "extends": [
+        "airbnb",
+        "plugin:jsx-a11y/recommended"
+    ],
+    "globals": {
+        "document": false,
+        "it": false,
+        "window": false,
+        "navigator": false,
+        "fetch": false,
+        "registration": false,
+        "URL": false,
+        "localStorage": true,
+        "alert": true,
+        "describe": false,
+        "cy": false,
+        "Cypress": false
+    },
+    "rules": {
+        "no-mixed-operators": "off",
+        "react/jsx-filename-extension": [
+            1,
+            {
+                "extensions": [
+                    ".js",
+                    ".jsx"
+                ]
+            }
+        ],
+        "jsx-a11y/label-has-for": [
+            2,
+            {
+                "components": [
+                    "Label"
+                ],
+                "required": {
+                    "some": [
+                        "nesting",
+                        "id"
+                    ]
+                },
+                "allowChildren": false
+            }
+        ]
+    },
+    "env": {
+        "jest": true
+    },
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "paths": [
+                    "src"
+                ]
+            }
+        }
+    }
+}
