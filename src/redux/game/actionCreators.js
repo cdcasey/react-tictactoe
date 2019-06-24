@@ -1,20 +1,31 @@
-import { SELECT_SQUARE, SELECT_HISTORY } from '../actions';
+import { SELECT_SQUARE, SELECT_HISTORY, SET_SORT } from '../actions';
 
 
-const selectSquareActionSet = index => ({
+export const selectSquare = (squares, lastSquare, currentHistory) => ({
   type: SELECT_SQUARE,
-  payload: index,
+  payload: { squares, lastSquare, currentHistory },
 });
 
-export const selectSquare = index => dispatch => (
-  dispatch(selectSquareActionSet(index))
-);
+// export const selectSquare = (squares, lastSquare) => dispatch => (
+//   dispatch(selectSquareActionSet(squares, lastSquare))
+// );
 
-const selectHistoryActionSet = index => ({
-  type: SELECT_HISTORY,
-  payload: index,
+export const selectHistory = (step) => {
+  const xIsNext = step % 2 === 0;
+  return {
+    type: SELECT_HISTORY,
+    payload: { step, xIsNext },
+  };
+};
+
+// export const selectHistory = step => dispatch => (
+//   dispatch(selectHistoryActionSet(step))
+// );
+
+export const setSort = () => ({
+  type: SET_SORT,
 });
 
-export const selectHistory = index => dispatch => (
-  dispatch(selectHistoryActionSet(index))
-);
+// export const setSort = () => dispatch => (
+//   dispatch(setSortActionSet())
+// );
