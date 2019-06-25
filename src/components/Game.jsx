@@ -3,19 +3,7 @@ import React from 'react';
 import Board from './Board';
 
 
-// export default class Game extends React.Component {
 export default function Game(props) {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     history: [{
-  //       squares: Array(9).fill(null),
-  //     }],
-  //     stepNumber: 0,
-  //     xIsNext: true,
-  //     ascending: false,
-  //   };
-  // }
   const [history, setHistory] = React.useState([{
     squares: Array(9).fill(null),
   }])
@@ -24,53 +12,46 @@ export default function Game(props) {
   const [ascending, setAscending] = React.useState(false)
 
   function handleClick(i) {
-    const history = this.state.history.slice(0, this.state.stepNumber + 1);
-    const current = history[history.length - 1];
+    const theHistory = history.slice(0, stepNumber + 1);
+    const current = theHistory[theHistory.length - 1];
     const squares = current.squares.slice();
     // If there's a winner or if there's an X or O in the square, do nothing
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
-    squares[i] = this.state.xIsNext ? 'X' : 'O';
+    squares[i] = xIsNext ? 'X' : 'O';
     const col = i % 3;
     const row = Math.floor(i / 3);
     const lastSquare = [col, row];
-    this.setState({
-      // history: history.concat([{
-      //     squares,
-      // }]),
-      history: [...history, { squares, lastSquare }],
-      stepNumber: history.length,
-      xIsNext: !this.state.xIsNext,
-    });
+
+    setHistory([...theHistory, { squares, lastSquare }])
+    setStepNumber(theHistory.length)
+    setXIsNext(!xIsNext)
+
   }
 
   function jumpTo(step) {
-    this.setState({
-      stepNumber: step,
-      xIsNext: (step % 2) === 0,
-    });
+    setStepNumber(step)
+    setXIsNext((step % 2) === 0)
   }
 
   function setSort() {
-    this.setState({
-      ascending: !this.state.ascending,
-    });
+    setAscending(!ascending)
   }
 
-  const { history } = this.state;
+  // const { history } = this.state;
   // const history = this.state.history.slice(0, this.state.stepNumber + 1);
-  const current = history[this.state.stepNumber];
+  const current = history[stepNumber];
   const winner = calculateWinner(current.squares);
 
   const moves = history.map((step, move) => {
-    const currentStep = move === this.state.stepNumber ? 'current' : '';
+    const currentStep = move === stepNumber ? 'current' : '';
     const desc = move
       ? `Go to move #${move} ${step.lastSquare}`
       : 'Go to game start';
     return (
       <li className={currentStep} key={move}>
-        <button type="button" onClick={() => this.jumpTo(move)}>
+        <button type="button" onClick={() => jumpTo(move)}>
           {desc}
         </button>
       </li>
@@ -80,10 +61,10 @@ export default function Game(props) {
   let status;
   if (winner) {
     status = `Winner: ${winner.letter}`;
-  } else if (this.state.stepNumber === 9) {
+  } else if (stepNumber === 9) {
     status = 'DRAW. There is no winner. You may as well stop playing.';
   } else {
-    status = `Next player: ${this.state.xIsNext ? 'X' : 'O'}`;
+    status = `Next player: ${xIsNext ? 'X' : 'O'}`;
   }
 
   return (
@@ -92,14 +73,13 @@ export default function Game(props) {
         <Board
           winningCells={winner ? winner.cells : []}
           squares={current.squares}
-          onClick={i => this.handleClick(i)}
+          onClick={i => handleClick(i)}
         />
       </div>
       <div className="game-info">
         <div>{status}</div>
-        <button onClick={() => this.setSort()}>Reverse sort order</button>
-        <ol className={this.state.ascending ? 'ascending' : 'descending'}>{moves}</ol>
-        {/* <ol>{this.state.ascending ? moves.reverse() : moves}</ol> */}
+        <button onClick={() => setSort()}>Reverse sort order</button>
+        <ol className={ascending ? 'ascending' : 'descending'}>{moves}</ol>
       </div>
     </div>
   );
