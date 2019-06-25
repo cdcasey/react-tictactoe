@@ -2,8 +2,22 @@ import React from 'react';
 
 import Board from './Board';
 
+const SELECT_SQUARE = 'SELECT_SQARE'
 
+function gameReducer(state, action) {
+  switch (action.type) {
+    case SELECT_SQUARE:
+
+      break;
+
+    default:
+      return state;
+  }
+}
 export default function Game(props) {
+  const [state, dispatch] = React.useReducer(gameReducer, [{
+    squares: Array(9).fill(null),
+  }])
   const [history, setHistory] = React.useState([{
     squares: Array(9).fill(null),
   }])
