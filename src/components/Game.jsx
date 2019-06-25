@@ -39,8 +39,6 @@ export default function Game(props) {
     setAscending(!ascending)
   }
 
-  // const { history } = this.state;
-  // const history = this.state.history.slice(0, this.state.stepNumber + 1);
   const current = history[stepNumber];
   const winner = calculateWinner(current.squares);
 

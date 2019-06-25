@@ -15,22 +15,8 @@ export default function Board(props) {
     );
   }
 
-
-  // const width = 3;
-  // const totalSquares = 9;
-  // let squareNum = 0;
-  // const board = [];
-  // for (let i = 0; i < totalSquares; i += 3) {
-  //   const row = [];
-  //   for (let j = 0; j < 3; j++) {
-  //     row.push(renderSquare(squareNum));
-  //     squareNum++;
-  //   }
-  //   board.push(<div key={`row${i / width}`} className="board-row">{row}</div>);
-  // }
   return (
     <div>
-      {/* {board} */}
       <div className="board-row">
         {renderSquare(0)}
         {renderSquare(1)}

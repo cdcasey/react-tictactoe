@@ -1,6 +1,5 @@
 import React from 'react';
 
-console.log('HELLO');
 
 export default function Square(props) {
   return (
