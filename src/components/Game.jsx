@@ -16,9 +16,12 @@ export default function Game(props) {
   //     ascending: false,
   //   };
   // }
-  [history, setHistory] = React.useState([{
+  const [history, setHistory] = React.useState([{
     squares: Array(9).fill(null),
   }])
+  const [stepNumber, setStepNumber] = React.useState(0)
+  const [xIsNext, setXIsNext] = React.useState(true)
+  const [ascending, setAscending] = React.useState(false)
 
   function handleClick(i) {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
