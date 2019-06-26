@@ -2,32 +2,66 @@ import React from 'react';
 
 import Board from './Board';
 
-const SELECT_SQUARE = 'SELECT_SQARE'
+const SELECT_SQUARE = 'SELECT_SQUARE'
+const CHANGE_SORT_ORDER = 'CHANGE_SORT_ORDER'
+const JUMP_TO_STEP = 'JUMP_TO_STEP'
+const SWITCH_PLAYER = 'SWITCH_PLAYER'
 
-function gameReducer(state, action) {
+const initialState = {
+  history: [{
+      squares: Array(9).fill(null),
+  }],
+  stepNumber: 0,
+  xIsNext: true,
+  ascending: false
+};
+
+function gameReducer(state = initialState, action) {
   switch (action.type) {
     case SELECT_SQUARE:
+      return {
+        history: [
+          ...action.payload.currentHistory,
+          {
+            squares: action.payload.squares,
+            lastSquare: action.payload.lastSquare
+          },
+        ],
+        xIsNext: !state.xIsNext,
+        stepNumber: state.stepNumber + 1,
+      }
 
-      break;
+    case CHANGE_SORT_ORDER:
+      return {
+        ...state,
+        ascending: !state.ascending,
+      }
+
+    case JUMP_TO_STEP:
+      return {
+        ...state,
+        stepNumber: action.payload,
+      }
+
+    case SWITCH_PLAYER: {
+      return {
+        ...state,
+        xIsNext: action.payload,
+      }
+    }
 
     default:
       return state;
   }
 }
+
 export default function Game(props) {
-  const [state, dispatch] = React.useReducer(gameReducer, [{
-    squares: Array(9).fill(null),
-  }])
-  const [history, setHistory] = React.useState([{
-    squares: Array(9).fill(null),
-  }])
-  const [stepNumber, setStepNumber] = React.useState(0)
-  const [xIsNext, setXIsNext] = React.useState(true)
-  const [ascending, setAscending] = React.useState(false)
+  const [state, dispatch] = React.useReducer(gameReducer, initialState)
+  const { history, stepNumber, xIsNext, ascending } = state;
 
   function handleClick(i) {
-    const theHistory = history.slice(0, stepNumber + 1);
-    const current = theHistory[theHistory.length - 1];
+    const currentHistory = history.slice(0, stepNumber + 1);
+    const current = currentHistory[currentHistory.length - 1];
     const squares = current.squares.slice();
     // If there's a winner or if there's an X or O in the square, do nothing
     if (calculateWinner(squares) || squares[i]) {
@@ -38,19 +72,16 @@ export default function Game(props) {
     const row = Math.floor(i / 3);
     const lastSquare = [col, row];
 
-    setHistory([...theHistory, { squares, lastSquare }])
-    setStepNumber(theHistory.length)
-    setXIsNext(!xIsNext)
-
+    dispatch({type: SELECT_SQUARE, payload: {squares, lastSquare, currentHistory}})
   }
 
   function jumpTo(step) {
-    setStepNumber(step)
-    setXIsNext((step % 2) === 0)
+    dispatch({type: JUMP_TO_STEP, payload: step})
+    dispatch({type: SWITCH_PLAYER, payload: (step % 2) === 0})
   }
 
   function setSort() {
-    setAscending(!ascending)
+    dispatch({type: CHANGE_SORT_ORDER})
   }
 
   const current = history[stepNumber];
