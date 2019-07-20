@@ -4,17 +4,31 @@ import { useSelector, useDispatch } from 'react-redux';
 import { actionCreators } from 'redux/game';
 import Board from './Board';
 
-const dispatchers = {
-  setSort: actionCreators.setSort,
-  selectHistory: actionCreators.selectHistory,
-  selectSquare: actionCreators.selectSquare,
-};
 
 export default function Game() {
   const {
     history, stepNumber, xIsNext, ascending,
   } = useSelector(state => state.game);
   const dispatch = useDispatch();
+
+  const selectSquare = React.useCallback(
+    (squares, lastSquare, currentHistory) => {
+      dispatch(actionCreators.selectSquare(squares, lastSquare, currentHistory));
+    },
+    [dispatch],
+  );
+  const selectHistory = React.useCallback(
+    (move) => {
+      dispatch(actionCreators.selectHistory(move));
+    },
+    [dispatch],
+  );
+  const setSort = React.useCallback(
+    () => {
+      dispatch(actionCreators.setSort());
+    },
+    [dispatch],
+  );
 
   const currentHistory = history.slice(0, stepNumber + 1);
 
@@ -31,7 +45,7 @@ export default function Game() {
     const col = i % 3;
     const row = Math.floor(i / 3);
     const lastSquare = [col, row];
-    dispatch(dispatchers.selectSquare(squares, lastSquare, currentHistory));
+    selectSquare(squares, lastSquare, currentHistory);
   };
 
   const moves = history.map((step, move) => {
@@ -41,7 +55,7 @@ export default function Game() {
       : 'Go to game start';
     return (
       <li className={currentStepClass} key={step.lastSquare.toString()}>
-        <button type="button" onClick={() => dispatch(dispatchers.selectHistory(move))}>
+        <button type="button" onClick={() => selectHistory(move)}>
           {desc}
         </button>
       </li>
@@ -69,7 +83,7 @@ export default function Game() {
       </div>
       <div className="game-info">
         <div>{status}</div>
-        <button type="button" onClick={() => dispatch(dispatchers.setSort())}>Reverse sort order</button>
+        <button type="button" onClick={setSort}>Reverse sort order</button>
         <ol className={ascending ? 'ascending' : 'descending'}>{moves}</ol>
         {/* <ol>{this.state.ascending ? moves.reverse() : moves}</ol> */}
       </div>
