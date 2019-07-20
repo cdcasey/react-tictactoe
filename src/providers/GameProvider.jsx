@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const GameContext = React.useContext();
+export const GameContext = React.createContext();
 
 export function GameProvider(props) {
   const [history, setHistory] = React.useState([{

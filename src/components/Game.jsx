@@ -1,15 +1,12 @@
 import React from 'react';
 
+import { GameContext } from 'providers/GameProvider';
 import Board from './Board';
 
-
 export default function Game() {
-  const [history, setHistory] = React.useState([{
-    squares: Array(9).fill(null),
-  }]);
-  const [stepNumber, setStepNumber] = React.useState(0);
-  const [xIsNext, setXIsNext] = React.useState(true);
-  const [ascending, setAscending] = React.useState(false);
+  const {
+    history, setHistory, stepNumber, setStepNumber, xIsNext, setXIsNext, ascending, setAscending,
+  } = React.useContext(GameContext);
 
   function handleClick(i) {
     const theHistory = history.slice(0, stepNumber + 1);

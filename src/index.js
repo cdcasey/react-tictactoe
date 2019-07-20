@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+import { GameProvider } from 'providers/GameProvider';
 import Game from './components/Game';
 
 import './index.css';
@@ -7,6 +9,8 @@ import './index.css';
 // ========================================
 
 ReactDOM.render(
-  <Game />,
+  <GameProvider>
+    <Game />
+  </GameProvider>,
   document.getElementById('root'),
 );
