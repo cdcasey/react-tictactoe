@@ -3,14 +3,14 @@ import React from 'react';
 import Square from './Square';
 
 
-export default function Board(props) {
+export default function Board({ winningCells, squares, onClick }) {
   function renderSquare(i) {
     return (
       <Square
-        winningCell={props.winningCells.includes(i) ? 'winner' : ''}
+        winningCell={winningCells.includes(i) ? 'winner' : ''}
         key={i}
-        value={props.squares[i]}
-        onClick={() => props.onClick(i)}
+        value={squares[i]}
+        onClick={() => onClick(i)}
       />
     );
   }

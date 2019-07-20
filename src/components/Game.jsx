@@ -3,13 +3,13 @@ import React from 'react';
 import Board from './Board';
 
 
-export default function Game(props) {
+export default function Game() {
   const [history, setHistory] = React.useState([{
     squares: Array(9).fill(null),
-  }])
-  const [stepNumber, setStepNumber] = React.useState(0)
-  const [xIsNext, setXIsNext] = React.useState(true)
-  const [ascending, setAscending] = React.useState(false)
+  }]);
+  const [stepNumber, setStepNumber] = React.useState(0);
+  const [xIsNext, setXIsNext] = React.useState(true);
+  const [ascending, setAscending] = React.useState(false);
 
   function handleClick(i) {
     const theHistory = history.slice(0, stepNumber + 1);
@@ -24,19 +24,18 @@ export default function Game(props) {
     const row = Math.floor(i / 3);
     const lastSquare = [col, row];
 
-    setHistory([...theHistory, { squares, lastSquare }])
-    setStepNumber(theHistory.length)
-    setXIsNext(!xIsNext)
-
+    setHistory([...theHistory, { squares, lastSquare }]);
+    setStepNumber(theHistory.length);
+    setXIsNext(!xIsNext);
   }
 
   function jumpTo(step) {
-    setStepNumber(step)
-    setXIsNext((step % 2) === 0)
+    setStepNumber(step);
+    setXIsNext((step % 2) === 0);
   }
 
   function setSort() {
-    setAscending(!ascending)
+    setAscending(!ascending);
   }
 
   const current = history[stepNumber];
