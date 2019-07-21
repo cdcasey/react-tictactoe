@@ -6,10 +6,10 @@ import Board from './Board';
 export default function Game(props) {
   const [history, setHistory] = React.useState([{
     squares: Array(9).fill(null),
-  }])
-  const [stepNumber, setStepNumber] = React.useState(0)
-  const [xIsNext, setXIsNext] = React.useState(true)
-  const [ascending, setAscending] = React.useState(false)
+  }]);
+  const [stepNumber, setStepNumber] = React.useState(0);
+  const [xIsNext, setXIsNext] = React.useState(true);
+  const [ascending, setAscending] = React.useState(false);
 
   function handleClick(i) {
     const theHistory = history.slice(0, stepNumber + 1);
@@ -24,19 +24,14 @@ export default function Game(props) {
     const row = Math.floor(i / 3);
     const lastSquare = [col, row];
 
-    setHistory([...theHistory, { squares, lastSquare }])
-    setStepNumber(theHistory.length)
-    setXIsNext(!xIsNext)
-
+    setHistory([...theHistory, { squares, lastSquare }]);
+    setStepNumber(theHistory.length);
+    setXIsNext(!xIsNext);
   }
 
   function jumpTo(step) {
-    setStepNumber(step)
-    setXIsNext((step % 2) === 0)
-  }
-
-  function setSort() {
-    setAscending(!ascending)
+    setStepNumber(step);
+    setXIsNext((step % 2) === 0);
   }
 
   const current = history[stepNumber];
@@ -76,7 +71,7 @@ export default function Game(props) {
       </div>
       <div className="game-info">
         <div>{status}</div>
-        <button onClick={() => setSort()}>Reverse sort order</button>
+        <button onClick={() => setAscending(!ascending)}>Reverse sort order</button>
         <ol className={ascending ? 'ascending' : 'descending'}>{moves}</ol>
       </div>
     </div>
