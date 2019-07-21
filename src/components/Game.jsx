@@ -11,6 +11,12 @@ export default function Game(props) {
   const [xIsNext, setXIsNext] = React.useState(true);
   const [ascending, setAscending] = React.useState(false);
 
+  React.useEffect(() => {
+    window.localStorage.setItem('state', JSON.stringify({
+      history, stepNumber, xIsNext, ascending,
+    }));
+  }, [stepNumber, ascending]);
+
   function handleClick(i) {
     const theHistory = history.slice(0, stepNumber + 1);
     const current = theHistory[theHistory.length - 1];
