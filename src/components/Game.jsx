@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { GameContext } from 'providers/GameProvider';
+import { GameContext } from '../providers/GameProvider';
 import Board from './Board';
 
 export default function Game() {
