@@ -16,6 +16,13 @@ export default class Game extends React.Component {
         };
     }
 
+    componentDidUpdate() {
+        const {history, stepNumber, xIsNext, ascending,} = this.state;
+        window.localStorage.setItem('state', JSON.stringify({
+          history, stepNumber, xIsNext, ascending,
+        }))
+    }
+
     handleClick(i) {
         const history = this.state.history.slice(0, this.state.stepNumber + 1);
         const current = history[history.length - 1];
