@@ -21,6 +21,8 @@ describe('<Game/> component',()=>{
     expect(square0.textContent).toBe('')
     fireEvent.click(square0)
     expect(square0.textContent).toBe('X')
+    fireEvent.click(square0)
+    expect(square0.textContent).toBe('X')
   })
 
   it('should have a sorting button',()=>{
@@ -72,5 +74,7 @@ describe('<Game/> component',()=>{
     fireEvent.click(square8)
 
     expect(winnerDisplay.textContent).toBe('Winner: X')
+    fireEvent.click(square0)
+    expect(square0.textContent).toBe('X')
   })
 })
