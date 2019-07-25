@@ -77,8 +77,8 @@ export default function Game(props) {
       </div>
       <div className="game-info">
         <div>{status}</div>
-        <button onClick={() => setAscending(!ascending)}>Reverse sort order</button>
-        <ol className={ascending ? 'ascending' : 'descending'}>{moves}</ol>
+        <button onClick={() => setAscending(!ascending)} data-testid="sort-button">Reverse sort order</button>
+        <ol className={ascending ? 'ascending' : 'descending'} data-testid="sort-list">{moves}</ol>
       </div>
     </div>
   );

@@ -11,6 +11,7 @@ export default function Board(props) {
         key={i}
         value={props.squares[i]}
         onClick={() => props.onClick(i)}
+        testid={`square${  i}`}
       />
     );
   }
