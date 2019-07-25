@@ -15,7 +15,7 @@ export default function Game(props) {
     window.localStorage.setItem('state', JSON.stringify({
       history, stepNumber, xIsNext, ascending,
     }));
-  }, [stepNumber, ascending]);
+  }, [history, stepNumber, xIsNext, ascending]);
 
   function handleClick(i) {
     const theHistory = history.slice(0, stepNumber + 1);
