@@ -99,7 +99,7 @@ export default class Game extends React.Component {
                 <div className="game-info">
                     <div>{status}</div>
                     <button onClick={() => this.setSort()} data-testid="sort-button">Reverse sort order</button>
-                    <ol className={this.state.ascending ? "ascending" : "descending"}>{moves}</ol>
+                    <ol className={this.state.ascending ? "ascending" : "descending"} data-testid="sort-list">{moves}</ol>
                     {/* <ol>{this.state.ascending ? moves.reverse() : moves}</ol> */}
                 </div>
             </div>

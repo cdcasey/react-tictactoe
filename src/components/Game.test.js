@@ -23,19 +23,54 @@ describe('<Game/> component',()=>{
     expect(square0.textContent).toBe('X')
   })
 
-  xit('should have a sorting button',()=>{
-    const mockSort = jest.fn();
-
-    const {getByTestId, container, debug} = render(<Game />)
+  it('should have a sorting button',()=>{
+     const {getByTestId, debug} = render(<Game />)
+    const square0 = getByTestId('square0')
+    fireEvent.click(square0)
 
     const sortButton = getByTestId('sort-button')
     expect(sortButton).toBeTruthy()
-    // fireEvent.click(sortButton)
-    // fireEvent.click(sortButton)
-    // const listItems = container.querySelectorAll('li');
-    // console.warn(listItems.length);
-    // // debug()
-    // expect(mockSort).toHaveBeenCalledTimes(1)
+
+    const sortList = getByTestId('sort-list');
+    expect(sortList.className).toBe('descending')
+    fireEvent.click(sortButton)
+    expect(sortList.className).toBe('ascending')
   })
 
+  it('should reset squares on go to game start',()=>{
+    const {getByTestId, getByText} = render(<Game />)
+
+    const square0 = getByTestId('square0')
+    fireEvent.click(square0)
+    const square1 = getByTestId('square1')
+    fireEvent.click(square1)
+
+    const gameStart = getByText('Go to game start')
+    fireEvent.click(gameStart)
+
+    expect(square0.textContent).toBe('')
+    expect(square1.textContent).toBe('')
+
+  })
+
+  it('should display a winner when appropriate',()=>{
+    const {getByTestId, getByText} = render(<Game />)
+    const winnerDisplay = getByText('Next player: X')
+    expect(winnerDisplay).toBeTruthy()
+
+    const square0 = getByTestId('square0')
+    fireEvent.click(square0)
+    const square1 = getByTestId('square1')
+    fireEvent.click(square1)
+
+    const square4 = getByTestId('square4')
+    fireEvent.click(square4)
+    const square5 = getByTestId('square5')
+    fireEvent.click(square5)
+
+    const square8 = getByTestId('square8')
+    fireEvent.click(square8)
+
+    expect(winnerDisplay.textContent).toBe('Winner: X')
+  })
 })
