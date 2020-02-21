@@ -1,7 +1,7 @@
-import { createStore } from 'redux';
+// import { createStore } from 'redux';
+import { configure, configureStore } from '@reduxjs/toolkit';
 
 import rootReducer from './redux/rootReducer';
-
 
 // const enhancers = [];
 
@@ -14,6 +14,10 @@ import rootReducer from './redux/rootReducer';
 // }
 
 const { __REDUX_DEVTOOLS_EXTENSION__ } = window;
-const store = createStore(rootReducer, {}, __REDUX_DEVTOOLS_EXTENSION__());
+// const store = createStore(rootReducer, {}, __REDUX_DEVTOOLS_EXTENSION__());
+const store = configureStore({
+  reducer: rootReducer
+  // devTools: false
+});
 
 export default store;
