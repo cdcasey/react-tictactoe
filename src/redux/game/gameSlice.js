@@ -36,7 +36,7 @@ const gameSlice = createSlice({
         return { payload: { step, xIsNext } };
       }
     },
-    setSort(state, action) {
+    setSort(state) {
       state.ascending = !state.ascending;
     }
   }

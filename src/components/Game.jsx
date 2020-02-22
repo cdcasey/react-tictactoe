@@ -64,7 +64,7 @@ export default function Game({
       </div>
       <div className="game-info">
         <div>{status}</div>
-        <button type="button" onClick={setSort}>
+        <button type="button" onClick={() => setSort()}>
           Reverse sort order
         </button>
         <ol className={ascending ? 'ascending' : 'descending'}>{moves}</ol>
