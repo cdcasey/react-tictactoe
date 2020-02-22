@@ -8,10 +8,11 @@ function mapStateToProps(state) {
   return { ...game };
 }
 
+const { setSort, selectHistory, selectSquare } = actionCreators;
 const mapDispatchToProps = {
-  setSort: actionCreators.setSort,
-  selectHistory: actionCreators.selectHistory,
-  selectSquare: actionCreators.selectSquare,
+  setSort,
+  selectHistory,
+  selectSquare
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

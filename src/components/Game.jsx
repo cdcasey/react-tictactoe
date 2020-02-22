@@ -3,7 +3,13 @@ import React from 'react';
 import Board from './Board';
 
 export default function Game({
-  history, stepNumber, xIsNext, ascending, setSort, selectHistory, selectSquare,
+  history,
+  stepNumber,
+  xIsNext,
+  ascending,
+  setSort,
+  selectHistory,
+  selectSquare
 }) {
   const currentHistory = history.slice(0, stepNumber + 1);
 
@@ -11,7 +17,7 @@ export default function Game({
   const squares = currentBoard.squares.slice();
   const winner = calculateWinner(currentBoard.squares);
 
-  const handleClick = (i) => {
+  const handleClick = i => {
     // If there's a winner or if there's an X or O in the square, do nothing
     if (winner || squares[i]) {
       return;
@@ -40,7 +46,7 @@ export default function Game({
   let status;
   if (winner) {
     status = `Winner: ${winner.letter}`;
-  // } else if (this.state.stepNumber === 9) {
+    // } else if (this.state.stepNumber === 9) {
   } else if (squares.every(Boolean)) {
     status = 'DRAW. There is no winner. You may as well stop playing.';
   } else {
@@ -58,7 +64,9 @@ export default function Game({
       </div>
       <div className="game-info">
         <div>{status}</div>
-        <button type="button" onClick={setSort}>Reverse sort order</button>
+        <button type="button" onClick={setSort}>
+          Reverse sort order
+        </button>
         <ol className={ascending ? 'ascending' : 'descending'}>{moves}</ol>
         {/* <ol>{this.state.ascending ? moves.reverse() : moves}</ol> */}
       </div>
@@ -75,13 +83,14 @@ function calculateWinner(squares) {
     [1, 4, 7],
     [2, 5, 8],
     [0, 4, 8],
-    [2, 4, 6],
+    [2, 4, 6]
   ];
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
       return {
-        letter: squares[a], cells: [a, b, c],
+        letter: squares[a],
+        cells: [a, b, c]
       };
     }
   }

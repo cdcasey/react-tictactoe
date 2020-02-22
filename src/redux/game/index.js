@@ -1,7 +1,7 @@
-import reducers from './reducers';
-import * as actionCreators from './actionCreators';
+import * as actionCreators from './gameSlice';
 import * as selectors from './selectors';
+import reducers from './gameSlice';
 
-export { actionCreators, selectors };
+export { selectors, actionCreators };
 
 export default reducers;
