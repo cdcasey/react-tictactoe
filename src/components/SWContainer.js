@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { actionCreators, selectors as swSelectors } from '../redux/sw';
 import { selectors as gameSelectors } from '../redux/game';
 import SWComponent from './SWComponent';
-import { stepNumberSelector } from 'redux/game/selectors';
 
 function mapStateToProps(state) {
   return {
