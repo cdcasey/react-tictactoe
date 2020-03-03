@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Board from './Board';
+import SW from './SWContainer';
 
 export default function Game({
   history,
@@ -70,6 +71,7 @@ export default function Game({
         <ol className={ascending ? 'ascending' : 'descending'}>{moves}</ol>
         {/* <ol>{this.state.ascending ? moves.reverse() : moves}</ol> */}
       </div>
+      <SW />
     </div>
   );
 }
