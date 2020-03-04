@@ -9,6 +9,16 @@ import { createSelector } from '@reduxjs/toolkit';
 
 export const swStateSelector = state => state.sw;
 
+export const swErrorSelector = createSelector(
+  swStateSelector,
+  swState => swState.error
+);
+
+export const swLoadingSelector = createSelector(
+  swStateSelector,
+  swState => swState.loading
+);
+
 export const swCharacterNameSelector = createSelector(
   swStateSelector,
   swState => {

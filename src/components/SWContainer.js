@@ -7,6 +7,8 @@ import SWComponent from './SWComponent';
 function mapStateToProps(state) {
   return {
     name: swSelectors.swCharacterNameSelector(state),
+    error: swSelectors.swErrorSelector(state),
+    isLoading: swSelectors.swLoadingSelector(state),
     stepNumber: gameSelectors.stepNumberSelector(state)
   };
 }
