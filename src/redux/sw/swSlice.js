@@ -1,9 +1,9 @@
 import { createSlice, createAction } from '@reduxjs/toolkit';
 import { RSAA } from 'redux-api-middleware';
 
-export const GET_SW_SUCCESS = 'GET_SW_SUCCESS';
+export const GET_SW_SUCCESS = 'sw/GET_SW_SUCCESS';
 // export const GET_SW_REQUESTED = 'GET_SW_REQUESTED';
-export const GET_SW_FAILURE = 'GET_SW_FAILURE';
+export const GET_SW_FAILURE = 'sw/GET_SW_FAILURE';
 // export const GET_SW_SUCCESS = createAction('GET_SW_SUCCESS');
 export const GET_SW_REQUESTED = createAction('sw/GET_SW_REQUESTED');
 // export const GET_SW_FAILURE = createAction('GET_SW_FAILURE');
