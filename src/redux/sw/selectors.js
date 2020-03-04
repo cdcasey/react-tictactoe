@@ -21,12 +21,7 @@ export const swLoadingSelector = createSelector(
 
 export const swCharacterNameSelector = createSelector(
   swStateSelector,
-  swState => {
-    console.log(swState);
-    if (typeof swState.character !== 'undefined') {
-      return swState.character.name;
-    }
-  }
+  swState => swState.character.name
 );
 
 export default swStateSelector;

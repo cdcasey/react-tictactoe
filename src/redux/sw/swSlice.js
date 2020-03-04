@@ -22,8 +22,6 @@ export const getSW = characterId => ({
 });
 
 // export const getSW = () => dispatch => {
-//   console.log('DSIP', dispatch);
-
 //   return dispatch(getSWSet());
 // };
 
@@ -36,19 +34,15 @@ const swSlice = createSlice({
   },
   extraReducers: {
     [GET_SW_SUCCESS]: (state, action) => {
-      console.log('SUCCESS', state, action);
-
       state.character = { ...action.payload };
       state.loading = false;
       state.error = null;
     },
     [GET_SW_REQUESTED]: (state, action) => {
-      console.log('REQUEST', state, action);
       state.loading = true;
       state.error = null;
     },
     [GET_SW_FAILURE]: (state, action) => {
-      console.log('FAIL', state, action);
       state.loading = false;
       state.error = action.payload;
     }
