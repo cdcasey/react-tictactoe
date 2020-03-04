@@ -17,7 +17,14 @@ const gameSlice = createSlice({
     selectSquare: {
       reducer(state, action) {
         const { squares, lastSquare, currentHistory } = action.payload;
-        state.history.push({ squares, lastSquare });
+        // state.history.push({ squares, lastSquare });
+        state.history = [
+          ...action.payload.currentHistory,
+          {
+            squares,
+            lastSquare
+          }
+        ];
         state.stepNumber = currentHistory.length;
         state.xIsNext = !state.xIsNext;
       },
@@ -30,6 +37,7 @@ const gameSlice = createSlice({
         const { step, xIsNext } = action.payload;
         state.stepNumber = step;
         state.xIsNext = xIsNext;
+        // state.history = state.history.slice(0, step + 1);
       },
       prepare(step) {
         const xIsNext = step % 2 === 0;
