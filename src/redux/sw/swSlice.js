@@ -13,12 +13,12 @@ export const GET_SW_REQUESTED = createAction('sw/GET_SW_REQUESTED');
 //   [RSAA]:
 // }))
 
-export const getSW = characterId => ({
+export const getSW = (characterId) => ({
   [RSAA]: {
     types: [GET_SW_REQUESTED.type, GET_SW_SUCCESS, GET_SW_FAILURE],
     method: 'GET',
-    endpoint: `https://swapi.co/api/people/${characterId}/`
-  }
+    endpoint: `https://swapi.dev/api/people/${characterId}/`,
+  },
 });
 
 // export const getSW = () => dispatch => {
@@ -30,7 +30,7 @@ const swSlice = createSlice({
   initialState: {
     character: {},
     loading: false,
-    error: null
+    error: null,
   },
   extraReducers: {
     [GET_SW_SUCCESS]: (state, action) => {
@@ -45,8 +45,8 @@ const swSlice = createSlice({
     [GET_SW_FAILURE]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
-    }
-  }
+    },
+  },
 });
 
 // export const { get } = swSlice.actions;
