@@ -8,35 +8,21 @@ import reducer from 'redux/rootReducer';
 import { initialState as reducerInitialState } from 'redux/game/reducers';
 import GameContainer from './GameContainer';
 
-// function renderWithRedux(
-//   ui,
-//   {
-//     initialState = reducerInitialState,
-//     store = createStore(reducer, initialState),
-//     ...renderOptions
-//   } = {}
-// ) {
-//   function Wrapper({ children }) {
-//     return <Provider store={store}>{children}</Provider>;
-//   }
-//   console.log(initialState);
-
-//   return render(ui, { wrapper: Wrapper, ...renderOptions });
-// }
-
-const initialGameState = { game: reducerInitialState };
+const gameInitialState = { game: reducerInitialState };
 
 function renderWithRedux(
   ui,
   {
-    initialState = initialGameState,
+    initialState = gameInitialState,
     store = createStore(reducer, initialState),
     ...renderOptions
   } = {}
 ) {
-  console.log(store.getState());
+  function wrapper({ children }) {
+    return <Provider store={store}>{children}</Provider>;
+  }
 
-  return render(<Provider store={store}>{ui}</Provider>);
+  return render(ui, { wrapper, ...renderOptions });
 }
 
 const defaultProps = {
