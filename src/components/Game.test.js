@@ -31,7 +31,7 @@ const defaultProps = {
 };
 
 test('should render', () => {
-  const { debug } = renderWithRedux(<GameContainer />);
+  renderWithRedux(<GameContainer />);
   const [firstSquare, secondSquare] = screen.getAllByRole('button');
   expect(firstSquare).toHaveTextContent('');
   const status = screen.getByText('Next player: X');
@@ -39,7 +39,6 @@ test('should render', () => {
   fireEvent.click(firstSquare);
   expect(firstSquare).toHaveTextContent('X');
   fireEvent.click(secondSquare);
-  // debug();
   expect(secondSquare).toHaveTextContent('O');
 
   const reverser = screen.getByText('Reverse sort order');
