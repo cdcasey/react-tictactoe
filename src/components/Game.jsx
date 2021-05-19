@@ -1,6 +1,8 @@
 import React from 'react'
 
 import Board from './Board'
+import calculateWinner from '../lib/utils'
+import SWComponent from './SW'
 
 export default function Game(props) {
   const [history, setHistory] = React.useState([
@@ -89,29 +91,7 @@ export default function Game(props) {
         </button>
         <ol className={ascending ? 'ascending' : 'descending'}>{moves}</ol>
       </div>
+      <SWComponent stepNumber={stepNumber} />
     </div>
   )
-}
-
-function calculateWinner(squares) {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ]
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i]
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return {
-        letter: squares[a],
-        cells: [a, b, c],
-      }
-    }
-  }
-  return null
 }
