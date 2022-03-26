@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, createAction } from '@reduxjs/toolkit';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RSAA } from 'redux-api-middleware';
 
 export const GET_SW_SUCCESS = 'sw/GET_SW_SUCCESS';
@@ -51,6 +52,17 @@ const swSlice = createSlice({
   },
 });
 
+export const swApi = createApi({
+  reducerPath: 'swApi',
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://swapi.dev/api/' }),
+  endpoints: (builder) => ({
+    getCharacter: builder.query({
+      query: (characterId) => `people/${characterId}/`,
+    }),
+  }),
+});
+
+export const { useGetCharacterQuery } = swApi;
 // export const { get } = swSlice.actions;
 
 export default swSlice.reducer;

@@ -15,8 +15,8 @@ function mapStateToProps(state) {
 
 // const { getSW } = actionCreators;
 
-const mapDispatchToProps = {
-  getSW: actionCreators.getSW,
-};
+// const mapDispatchToProps = {
+//   getSW: actionCreators.getSW,
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SWComponent);
+export default connect(mapStateToProps, null)(SWComponent);
