@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import { swApi } from 'redux/sw/swSlice';
-import game from './redux/game';
+import game from './redux/game/gameSlice';
 
 const store = configureStore({
   reducer: {
