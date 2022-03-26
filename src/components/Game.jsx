@@ -3,7 +3,7 @@
 import React from 'react';
 
 import Board from './Board';
-import SW from './SWContainer';
+import SW from './SWComponent';
 
 export default function Game({
   history,
