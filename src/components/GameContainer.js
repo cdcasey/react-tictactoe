@@ -1,12 +1,7 @@
 import { connect } from 'react-redux';
 
-import { actionCreators, selectors } from '../redux/game';
+import { actionCreators } from '../redux/game';
 import Game from './Game';
-
-function mapStateToProps(state) {
-  const game = selectors.getGameState(state);
-  return { ...game };
-}
 
 const { setSort, selectHistory, selectSquare } = actionCreators;
 const mapDispatchToProps = {
@@ -15,4 +10,4 @@ const mapDispatchToProps = {
   selectSquare,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Game);
+export default connect(null, mapDispatchToProps)(Game);

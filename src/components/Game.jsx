@@ -1,19 +1,16 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import Board from './Board';
 import SW from './SWComponent';
 
-export default function Game({
-  history,
-  stepNumber,
-  xIsNext,
-  ascending,
-  setSort,
-  selectHistory,
-  selectSquare,
-}) {
+export default function Game({ setSort, selectHistory, selectSquare }) {
+  const gameState = useSelector((state) => state.game);
+  // eslint-disable-next-line object-curly-newline
+  const { history, stepNumber, xIsNext, ascending } = gameState;
+
   const currentHistory = history.slice(0, stepNumber + 1);
 
   const currentBoard = currentHistory[stepNumber];
