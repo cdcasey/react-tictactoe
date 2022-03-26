@@ -4,7 +4,10 @@ import { swApi } from 'redux/sw/swSlice';
 import game from './redux/game';
 
 const store = configureStore({
-  reducer: { [swApi.reducerPath]: swApi.reducer, game },
+  reducer: {
+    game,
+    [swApi.reducerPath]: swApi.reducer,
+  },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(swApi.middleware),
   devTools: true,
 });

@@ -12,4 +12,3 @@ export const swApi = createApi({
 });
 
 export const { useGetCharacterQuery } = swApi;
-// export const { get } = swSlice.actions;
