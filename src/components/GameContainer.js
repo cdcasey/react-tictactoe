@@ -12,7 +12,7 @@ const { setSort, selectHistory, selectSquare } = actionCreators;
 const mapDispatchToProps = {
   setSort,
   selectHistory,
-  selectSquare
+  selectSquare,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

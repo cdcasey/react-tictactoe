@@ -1,12 +1,8 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 
-export default function SWComponent({
-  name,
-  getSW,
-  stepNumber,
-  error,
-  isLoading
-}) {
+// eslint-disable-next-line object-curly-newline
+export default function SWComponent({ name, getSW, stepNumber, error, isLoading }) {
   React.useEffect(() => {
     getSW(stepNumber);
   }, [stepNumber, getSW]);

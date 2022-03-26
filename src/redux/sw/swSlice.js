@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { createSlice, createAction } from '@reduxjs/toolkit';
 import { RSAA } from 'redux-api-middleware';
 
@@ -38,6 +39,7 @@ const swSlice = createSlice({
       state.loading = false;
       state.error = null;
     },
+    // eslint-disable-next-line no-unused-vars
     [GET_SW_REQUESTED]: (state, action) => {
       state.loading = true;
       state.error = null;

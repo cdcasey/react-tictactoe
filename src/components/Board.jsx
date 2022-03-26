@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 
-
 export default function Board(props) {
-  const renderSquare = i => (
+  const renderSquare = (i) => (
     <button
       type="button"
       className={props.winningCells.includes(i) ? 'square winner' : 'square'}
@@ -11,7 +12,6 @@ export default function Board(props) {
       {props.squares[i]}
     </button>
   );
-
 
   return (
     <div>

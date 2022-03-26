@@ -6,7 +6,7 @@ import rootReducer from './redux/rootReducer';
 const store = configureStore({
   reducer: rootReducer,
   middleware: [apiMiddleware],
-  devTools: true
+  devTools: true,
 });
 
 export default store;

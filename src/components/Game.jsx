@@ -1,3 +1,5 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable react/prop-types */
 import React from 'react';
 
 import Board from './Board';
@@ -10,7 +12,7 @@ export default function Game({
   ascending,
   setSort,
   selectHistory,
-  selectSquare
+  selectSquare,
 }) {
   const currentHistory = history.slice(0, stepNumber + 1);
 
@@ -18,7 +20,7 @@ export default function Game({
   const squares = currentBoard.squares.slice();
   const winner = calculateWinner(currentBoard.squares);
 
-  const handleClick = i => {
+  const handleClick = (i) => {
     // If there's a winner or if there's an X or O in the square, do nothing
     if (winner || squares[i]) {
       return;
@@ -32,9 +34,7 @@ export default function Game({
 
   const moves = history.map((step, move) => {
     const currentStepClass = move === stepNumber ? 'current' : '';
-    const desc = move
-      ? `Go to move #${move} ${step.lastSquare}`
-      : 'Go to game start';
+    const desc = move ? `Go to move #${move} ${step.lastSquare}` : 'Go to game start';
     return (
       <li className={currentStepClass} key={step.lastSquare.toString()}>
         <button type="button" onClick={() => selectHistory(move)}>
@@ -60,7 +60,7 @@ export default function Game({
         <Board
           winningCells={winner ? winner.cells : []}
           squares={currentBoard.squares}
-          onClick={i => handleClick(i)}
+          onClick={(i) => handleClick(i)}
         />
       </div>
       <div className="game-info">
@@ -85,14 +85,14 @@ function calculateWinner(squares) {
     [1, 4, 7],
     [2, 5, 8],
     [0, 4, 8],
-    [2, 4, 6]
+    [2, 4, 6],
   ];
-  for (let i = 0; i < lines.length; i++) {
+  for (let i = 0; i < lines.length; i += 1) {
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
       return {
         letter: squares[a],
-        cells: [a, b, c]
+        cells: [a, b, c],
       };
     }
   }

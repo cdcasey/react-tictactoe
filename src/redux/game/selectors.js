@@ -6,11 +6,8 @@ import { createSelector } from '@reduxjs/toolkit';
  * @param {object} state - Current state
  * @returns {object} - The entire game state
  */
-export const getGameState = state => state.game;
+export const getGameState = (state) => state.game;
 
-export const stepNumberSelector = createSelector(
-  getGameState,
-  gameState => gameState.stepNumber
-);
+export const stepNumberSelector = createSelector(getGameState, (gameState) => gameState.stepNumber);
 
 export default getGameState;

@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
 const gameSlice = createSlice({
@@ -6,12 +7,12 @@ const gameSlice = createSlice({
     history: [
       {
         squares: Array(9).fill(null),
-        lastSquare: []
-      }
+        lastSquare: [],
+      },
     ],
     stepNumber: 0,
     xIsNext: true,
-    ascending: false
+    ascending: false,
   },
   reducers: {
     selectSquare: {
@@ -22,15 +23,15 @@ const gameSlice = createSlice({
           ...action.payload.currentHistory,
           {
             squares,
-            lastSquare
-          }
+            lastSquare,
+          },
         ];
         state.stepNumber = currentHistory.length;
         state.xIsNext = !state.xIsNext;
       },
       prepare(squares, lastSquare, currentHistory) {
         return { payload: { squares, lastSquare, currentHistory } };
-      }
+      },
     },
     selectHistory: {
       reducer(state, action) {
@@ -42,12 +43,12 @@ const gameSlice = createSlice({
       prepare(step) {
         const xIsNext = step % 2 === 0;
         return { payload: { step, xIsNext } };
-      }
+      },
     },
     setSort(state) {
       state.ascending = !state.ascending;
-    }
-  }
+    },
+  },
 });
 
 export const { selectSquare, selectHistory, setSort } = gameSlice.actions;

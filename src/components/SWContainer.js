@@ -9,14 +9,14 @@ function mapStateToProps(state) {
     name: swSelectors.swCharacterNameSelector(state),
     error: swSelectors.swErrorSelector(state),
     isLoading: swSelectors.swLoadingSelector(state),
-    stepNumber: gameSelectors.stepNumberSelector(state)
+    stepNumber: gameSelectors.stepNumberSelector(state),
   };
 }
 
 // const { getSW } = actionCreators;
 
 const mapDispatchToProps = {
-  getSW: actionCreators.getSW
+  getSW: actionCreators.getSW,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SWComponent);
