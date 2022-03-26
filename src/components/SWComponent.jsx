@@ -1,13 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useGetCharacterQuery } from 'redux/sw/swSlice';
-import { stepNumberSelector } from '../redux/game/selectors';
+// import { stepNumberSelector } from '../redux/game/selectors';
 
 export default function SWComponent() {
   const stepNumber = useSelector((state) => state.game.stepNumber);
   // same as previous. selector is too simple for createSelector
-  const st = useSelector((state) => stepNumberSelector(state));
-  console.log(st);
+  // const st = useSelector((state) => stepNumberSelector(state));
+  // console.log(st);
 
   const { data, error, isLoading } = useGetCharacterQuery(stepNumber);
 

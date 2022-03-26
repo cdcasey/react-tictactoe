@@ -1,12 +1,14 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
+import { setSort, selectHistory, selectSquare } from 'redux/game/gameSlice';
 import Board from './Board';
 import SW from './SWComponent';
 
-export default function Game({ setSort, selectHistory, selectSquare }) {
+export default function Game() {
+  const dispatch = useDispatch();
   const gameState = useSelector((state) => state.game);
   // eslint-disable-next-line object-curly-newline
   const { history, stepNumber, xIsNext, ascending } = gameState;
@@ -26,7 +28,7 @@ export default function Game({ setSort, selectHistory, selectSquare }) {
     const col = i % 3;
     const row = Math.floor(i / 3);
     const lastSquare = [col, row];
-    selectSquare(squares, lastSquare, currentHistory);
+    dispatch(selectSquare(squares, lastSquare, currentHistory));
   };
 
   const moves = history.map((step, move) => {
@@ -34,7 +36,7 @@ export default function Game({ setSort, selectHistory, selectSquare }) {
     const desc = move ? `Go to move #${move} ${step.lastSquare}` : 'Go to game start';
     return (
       <li className={currentStepClass} key={step.lastSquare.toString()}>
-        <button type="button" onClick={() => selectHistory(move)}>
+        <button type="button" onClick={() => dispatch(selectHistory(move))}>
           {desc}
         </button>
       </li>
@@ -62,7 +64,7 @@ export default function Game({ setSort, selectHistory, selectSquare }) {
       </div>
       <div className="game-info">
         <div>{status}</div>
-        <button type="button" onClick={() => setSort()}>
+        <button type="button" onClick={() => dispatch(setSort())}>
           Reverse sort order
         </button>
         <ol className={ascending ? 'ascending' : 'descending'}>{moves}</ol>
