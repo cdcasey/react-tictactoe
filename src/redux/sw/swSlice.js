@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createSelector } from '@reduxjs/toolkit';
 
 export const swApi = createApi({
   reducerPath: 'swApi',
@@ -11,4 +12,10 @@ export const swApi = createApi({
   }),
 });
 
+export const selectCharacterResult = swApi.endpoints.getCharacter.select();
+export const selectCharacter = createSelector(
+  selectCharacterResult,
+  (characterResult) => characterResult,
+);
+// console.log(selectCharacter());
 export const { useGetCharacterQuery } = swApi;

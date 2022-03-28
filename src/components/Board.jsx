@@ -1,8 +1,12 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
+import { selectCharacter } from 'redux/sw/swSlice';
+import { useSelector } from 'react-redux';
 
 export default function Board(props) {
+  const characters = useSelector((state) => selectCharacter(state));
+  console.log(characters);
   const renderSquare = (i) => (
     <button
       type="button"
