@@ -4,8 +4,11 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { setSort, selectHistory, selectSquare } from 'redux/game/gameSlice';
+import { useAddDataMutation } from 'redux/simpledata/simpledataSlice';
+import { useGetCharacterQuery } from 'redux/sw/swSlice';
 import Board from './Board';
 import SW from './SWComponent';
+import SimpleData from './SimpleData';
 
 export default function Game() {
   const dispatch = useDispatch();
@@ -19,6 +22,10 @@ export default function Game() {
   const squares = currentBoard.squares.slice();
   const winner = calculateWinner(currentBoard.squares);
 
+  const { data } = useGetCharacterQuery(stepNumber);
+  const [addData] = useAddDataMutation();
+
+  console.log(stepNumber);
   const handleClick = (i) => {
     // If there's a winner or if there's an X or O in the square, do nothing
     if (winner || squares[i]) {
@@ -29,7 +36,15 @@ export default function Game() {
     const row = Math.floor(i / 3);
     const lastSquare = [col, row];
     dispatch(selectSquare(squares, lastSquare, currentHistory));
+    const id = stepNumber + 1;
+    addData({ id, name: id === 1 ? 'SW CHARACTERS' : data.name });
   };
+
+  // useEffect(() => {
+  //   if (stepNumber !== 0 && data?.name) {
+  //     addData({ id: stepNumber, name: data.name });
+  //   }
+  // }, [stepNumber, data, addData]);
 
   const moves = history.map((step, move) => {
     const currentStepClass = move === stepNumber ? 'current' : '';
@@ -54,24 +69,27 @@ export default function Game() {
   }
 
   return (
-    <div className="game">
-      <div className="game-board">
-        <Board
-          winningCells={winner ? winner.cells : []}
-          squares={currentBoard.squares}
-          onClick={(i) => handleClick(i)}
-        />
+    <>
+      <div className="game">
+        <div className="game-board">
+          <Board
+            winningCells={winner ? winner.cells : []}
+            squares={currentBoard.squares}
+            onClick={(i) => handleClick(i)}
+          />
+        </div>
+        <div className="game-info">
+          <div>{status}</div>
+          <button type="button" onClick={() => dispatch(setSort())}>
+            Reverse sort order
+          </button>
+          <ol className={ascending ? 'ascending' : 'descending'}>{moves}</ol>
+          {/* <ol>{this.state.ascending ? moves.reverse() : moves}</ol> */}
+        </div>
+        <SW />
       </div>
-      <div className="game-info">
-        <div>{status}</div>
-        <button type="button" onClick={() => dispatch(setSort())}>
-          Reverse sort order
-        </button>
-        <ol className={ascending ? 'ascending' : 'descending'}>{moves}</ol>
-        {/* <ol>{this.state.ascending ? moves.reverse() : moves}</ol> */}
-      </div>
-      <SW />
-    </div>
+      <SimpleData />
+    </>
   );
 }
 
