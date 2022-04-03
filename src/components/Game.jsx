@@ -37,7 +37,8 @@ export default function Game() {
     const lastSquare = [col, row];
     dispatch(selectSquare(squares, lastSquare, currentHistory));
     const id = stepNumber + 1;
-    addData({ id, name: id === 1 ? 'SW CHARACTERS' : data.name });
+    // addData({ id, name: id === 1 ? 'SW CHARACTERS' : { name: data.name, attributes: data } });
+    addData({ id, data });
   };
 
   // useEffect(() => {

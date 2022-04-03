@@ -12,10 +12,10 @@ export const simpleDataApi = createApi({
       providesTags: ['Data'],
     }),
     addData: builder.mutation({
-      query: (body) => ({
+      query: ({ id, data }) => ({
         url: '/',
         method: 'POST',
-        body,
+        body: { id, data },
       }),
       invalidatesTags: ['Data'],
     }),
